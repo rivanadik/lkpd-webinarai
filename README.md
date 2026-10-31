@@ -1,4 +1,4 @@
-# LKPD E-Comic Matematika (PHP + MySQL)
+# LKPD E-Comic Webinar AI Canva Code (PHP + MySQL)
 
 ## Pasang di hosting (cPanel)
 1. Buat database MySQL + user di cPanel, lalu import `database.sql` lewat phpMyAdmin.
