@@ -1,0 +1,25 @@
+:root{--bg:#fff8e7;--ink:#1f2340;--accent:#ff6b35;--blue:#2b59c3;--card:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding:20px}
+header.top{background:var(--blue);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+header.top a{color:#fff;margin-left:14px;text-decoration:none;font-weight:600}
+h1,h2,h3{margin:.3em 0}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:14px;padding:18px;margin:18px 0;box-shadow:6px 6px 0 var(--ink)}
+.panel{position:relative}
+.panel .no{position:absolute;top:-14px;left:14px;background:var(--accent);color:#fff;border:3px solid var(--ink);border-radius:8px;padding:2px 12px;font-weight:800}
+.panel img{max-width:100%;border:3px solid var(--ink);border-radius:10px;display:block;margin:10px 0}
+.bubble{background:#fffbe0;border:3px solid var(--ink);border-radius:18px;padding:10px 14px;margin:10px 0}
+.bubble b{color:var(--accent)}
+label.opt{display:block;padding:8px 12px;border:2px solid #ccd;border-radius:10px;margin:6px 0;cursor:pointer}
+label.opt:hover{background:#eef3ff}input[type=radio]{margin-right:8px}
+input[type=text],input[type=password],input[type=number],input[type=file],select,textarea{width:100%;padding:10px;border:2px solid var(--ink);border-radius:8px;font:inherit;margin:4px 0 10px;background:#fff}
+textarea{min-height:90px}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:3px solid var(--ink);border-radius:10px;padding:9px 18px;font-weight:700;cursor:pointer;text-decoration:none;font-size:1rem}
+.btn.blue{background:var(--blue)}.btn.red{background:#c0392b}.btn.gray{background:#666}.btn.sm{padding:4px 10px;font-size:.85rem}
+.err{background:#ffe1e1;border:2px solid #c0392b;padding:10px;border-radius:8px;margin:10px 0}
+.ok{background:#e1ffe8;border:2px solid #1e8e3e;padding:10px;border-radius:8px;margin:10px 0}
+table{width:100%;border-collapse:collapse;background:#fff}th,td{border:1px solid #999;padding:7px 9px;text-align:left;vertical-align:top}th{background:#e8eefc}
+.skor{font-size:2.4rem;font-weight:800;color:var(--blue)}
+.benar{color:#1e8e3e;font-weight:700}.salah{color:#c0392b;font-weight:700}
+.pb{page-break-after:always}
+@media print{header.top,.noprint{display:none!important}body{background:#fff}.card{box-shadow:none}}
