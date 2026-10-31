@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 # LKPD E-Comic Informatika SMP (PHP + MySQL)
 
 Isi: materi Hardware, Software, Prompt AI (rumus P-T-K-F-B), Hitung Informatika (perkalian/pembagian satuan data), lalu tes 14 soal.
+=======
+# LKPD E-Comic Webinar AI Canva Code (PHP + MySQL)
+>>>>>>> beaf592246640e8e88c76c9904e786626b6b151c
 
 ## Pasang di hosting (cPanel)
 1. Buat database MySQL + user di cPanel, lalu import `database.sql` lewat phpMyAdmin (database kosong).
