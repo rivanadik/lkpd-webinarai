@@ -4,6 +4,8 @@ $st = db()->prepare('SELECT * FROM siswa WHERE id=?'); $st->execute([$sid]); $sw
 if (!$sw) exit('Data tidak ditemukan');
 $rows = db()->prepare('SELECT q.*, j.jawaban, j.benar FROM soal q LEFT JOIN jawaban j ON j.soal_id=q.id AND j.siswa_id=? ORDER BY q.urutan, q.id');
 $rows->execute([$sid]); $rows = $rows->fetchAll();
+$rekap = [];
+foreach ($rows as $q) if ($q['tipe'] === 'pg') { $k = $q['kategori']; $rekap[$k] = $rekap[$k] ?? [0, 0]; $rekap[$k][1]++; $rekap[$k][0] += (int)$q['benar']; }
 $fn = 'LKPD_' . preg_replace('/[^A-Za-z0-9]+/', '_', $sw['nama']) . '.pdf';
 ?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title><?= e($judul_laporan ?? 'Hasil') ?></title><link rel="stylesheet" href="<?= $base ?>assets/style.css">
@@ -17,10 +19,13 @@ $fn = 'LKPD_' . preg_replace('/[^A-Za-z0-9]+/', '_', $sw['nama']) . '.pdf';
   <tr><td>Kelas</td><td><?= e($sw['kelas']) ?></td></tr>
   <tr><td>Selesai</td><td><?= e($sw['selesai']) ?></td></tr>
   <tr><td>Skor (pilihan ganda)</td><td><span class="skor"><?= e(rtrim(rtrim((string)$sw['skor'], '0'), '.')) ?></span> / 100</td></tr></table>
+  <h3 style="margin-top:16px">Skor per Bagian</h3>
+  <table><tr><th>Bagian</th><th>Benar</th></tr>
+  <?php foreach ($rekap as $k => $r): ?><tr><td><?= e($k) ?></td><td><?= $r[0] ?> dari <?= $r[1] ?></td></tr><?php endforeach; ?></table>
   <h3 style="margin-top:16px">Rincian Jawaban</h3>
-  <table><tr><th>No</th><th>Pertanyaan</th><th>Jawaban</th><th>Kunci</th><th>Hasil</th></tr>
+  <table><tr><th>No</th><th>Bagian</th><th>Pertanyaan</th><th>Jawaban</th><th>Kunci</th><th>Hasil</th></tr>
   <?php foreach ($rows as $i => $q): ?>
-  <tr><td><?= $i + 1 ?></td><td><?= nl2br(e($q['pertanyaan'])) ?></td>
+  <tr><td><?= $i + 1 ?></td><td><?= e($q['kategori']) ?></td><td><?= nl2br(e($q['pertanyaan'])) ?></td>
   <td><?= nl2br(e($q['jawaban'] !== null && $q['jawaban'] !== '' ? $q['jawaban'] : '(kosong)')) ?></td>
   <td><?= $q['tipe'] === 'pg' ? e($q['kunci']) : '-' ?></td>
   <td><?php if ($q['tipe'] === 'pg') echo $q['benar'] ? '<span class="benar">Benar</span>' : '<span class="salah">Salah</span>'; else echo 'Uraian'; ?></td></tr>

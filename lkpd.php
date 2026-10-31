@@ -6,12 +6,12 @@ if ($s['selesai']) { header('Location: selesai.php'); exit; }
 $soal = db()->query('SELECT * FROM soal ORDER BY urutan, id')->fetchAll();
 ?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title><?= JUDUL ?></title><link rel="stylesheet" href="assets/style.css"></head><body>
-<header class="top"><b>📚 <?= JUDUL ?></b><span>👤 <?= e($s['nama']) ?></span></header>
+<header class="top"><b>📚 <?= JUDUL ?></b><span><a href="belajar.php" target="_blank">📖 Materi</a> 👤 <?= e($s['nama']) ?></span></header>
 <div class="wrap">
 <form method="post" action="simpan.php" onsubmit="return confirm('Kirim jawaban? Jawaban tidak bisa diubah lagi.')">
 <?= csrf_field() ?>
 <?php foreach ($soal as $i => $q): ?>
-<div class="card panel"><span class="no">Panel <?= $i + 1 ?></span>
+<div class="card panel"><span class="no">Soal <?= $i + 1 ?></span><span class="badge"><?= e($q['kategori']) ?></span>
   <?php if ($q['gambar']): ?><img src="uploads/<?= e($q['gambar']) ?>" alt="Panel komik <?= $i + 1 ?>"><?php endif; ?>
   <?php if ($q['dialog']): ?><div class="bubble"><b><?= e($q['tokoh']) ?>:</b> <?= nl2br(e($q['dialog'])) ?></div><?php endif; ?>
   <h3><?= nl2br(e($q['pertanyaan'])) ?></h3>

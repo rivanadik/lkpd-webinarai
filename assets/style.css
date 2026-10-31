@@ -23,3 +23,6 @@ table{width:100%;border-collapse:collapse;background:#fff}th,td{border:1px solid
 .benar{color:#1e8e3e;font-weight:700}.salah{color:#c0392b;font-weight:700}
 .pb{page-break-after:always}
 @media print{header.top,.noprint{display:none!important}body{background:#fff}.card{box-shadow:none}}
+.badge{display:inline-block;background:#e8eefc;border:2px solid var(--ink);border-radius:20px;padding:1px 10px;font-size:.8rem;font-weight:700;margin-left:6px}
+.analogi{background:#e1ffe8;border:3px dashed #1e8e3e;border-radius:12px;padding:10px 14px;margin:10px 0}
+.materi ul{margin:.4em 0 .4em 1.2em}.materi p{margin:.4em 0}

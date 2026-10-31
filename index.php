@@ -2,7 +2,7 @@
 require 'config.php';
 $err = '';
 $s = siswa_aktif();
-if ($s) { header('Location: ' . ($s['selesai'] ? 'selesai.php' : 'lkpd.php')); exit; }
+if ($s) { header('Location: ' . ($s['selesai'] ? 'selesai.php' : 'belajar.php')); exit; }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             db()->prepare('INSERT INTO siswa (nama,nama_key,kelas,token) VALUES (?,?,?,?)')
                 ->execute([$nama, $key, mb_substr($kelas, 0, 30), $token]);
             setcookie(COOKIE_SISWA, $token, ['expires' => time() + 86400 * 30, 'path' => '/', 'httponly' => true, 'samesite' => 'Lax']);
-            header('Location: lkpd.php'); exit;
+            header('Location: belajar.php'); exit;
         }
     }
 }
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <header class="top"><b>📚 <?= JUDUL ?></b><span><a href="admin/index.php">Admin</a></span></header>
 <div class="wrap"><div class="card">
 <h1>Selamat datang, calon matematikawan! 🎉</h1>
-<p>Baca komik, lalu jawab pertanyaannya. Isi nama dengan benar karena <b>satu nama hanya bisa mengerjakan satu kali</b>.</p>
+<p>Pelajari materi Informatika lewat komik (hardware, software, dan prompt AI), lalu kerjakan tes. Isi nama dengan benar karena <b>satu nama hanya bisa mengerjakan satu kali</b>.</p>
 <?php if ($err): ?><div class="err"><?= e($err) ?></div><?php endif; ?>
 <form method="post"><?= csrf_field() ?>
 <label>Nama lengkap</label><input type="text" name="nama" required maxlength="100">

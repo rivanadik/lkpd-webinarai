@@ -4,7 +4,7 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'lkpd_ecomic');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('JUDUL', 'LKPD E-Comic Matematika');
+define('JUDUL', 'LKPD E-Comic Informatika SMP');
 define('COOKIE_SISWA', 'lkpd_token');
 
 session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax']);
@@ -43,3 +43,15 @@ function siswa_aktif(): ?array {
 function nama_key(string $n): string {
     return mb_strtolower(trim(preg_replace('/\s+/', ' ', $n)), 'UTF-8');
 }
+
+// Format teks materi: baris "- " jadi poin, **tebal** jadi huruf tebal (aman dari XSS)
+function fmt(string $s): string {
+    $s = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', e($s));
+    $out = ''; $ul = false;
+    foreach (preg_split('/\R/', $s) as $l) {
+        if (preg_match('/^\s*-\s+(.*)$/', $l, $m)) { if (!$ul) { $out .= '<ul>'; $ul = true; } $out .= '<li>' . $m[1] . '</li>'; }
+        else { if ($ul) { $out .= '</ul>'; $ul = false; } if (trim($l) !== '') $out .= '<p>' . $l . '</p>'; }
+    }
+    return $out . ($ul ? '</ul>' : '');
+}
+const KATEGORI = ['Hardware', 'Software', 'Prompt AI', 'Hitung Informatika'];
